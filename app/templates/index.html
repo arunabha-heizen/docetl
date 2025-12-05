@@ -193,6 +193,18 @@
 <body>
     <header>
         <h1>DocETL Verification</h1>
+        <div id="usage-stats" style="display:none; text-align: right; font-size: 0.85rem; color: #64748b;">
+            <div>Tokens: <strong id="usage-inputs">0</strong> in / <strong id="usage-outputs">0</strong> out</div>
+            <div style="margin-top:2px;">Est. Cost: <strong style="color: #2563eb;">$<span
+                        id="usage-cost">0.00</span></strong></div>
+            <div style="margin-top:2px; font-size:0.8rem;">
+                Duration: <strong id="metric-duration">0.00</strong>s | CPU: <strong id="metric-cpu">0.00</strong>s
+            </div>
+            <div style="margin-top:2px; font-size:0.8rem;">
+                RAM (Peak): <strong id="metric-ram">0.00</strong>MB | CPU (Peak): <strong
+                    id="metric-cpu-peak">0.00</strong>%
+            </div>
+        </div>
     </header>
 
     <div class="controls">
@@ -292,6 +304,24 @@
         }
 
         function renderResults(data) {
+            // 0. Usage Stats
+            if (data.usage) {
+                document.getElementById('usage-stats').style.display = 'block';
+                document.getElementById('usage-inputs').textContent = data.usage.input_tokens.toLocaleString();
+                document.getElementById('usage-outputs').textContent = data.usage.output_tokens.toLocaleString();
+                document.getElementById('usage-cost').textContent = data.usage.estimated_cost.toFixed(4);
+            }
+            if (data.metrics) {
+                document.getElementById('usage-stats').style.display = 'block';
+                document.getElementById('metric-duration').textContent = data.metrics.wall_time_seconds.toFixed(2);
+                document.getElementById('metric-cpu').textContent = data.metrics.cpu_time_seconds.toFixed(2);
+            }
+            if (data.advanced_metrics) {
+                document.getElementById('usage-stats').style.display = 'block';
+                document.getElementById('metric-ram').textContent = data.advanced_metrics.peak_memory_mb.toFixed(2);
+                document.getElementById('metric-cpu-peak').textContent = data.advanced_metrics.peak_cpu_usage_percent.toFixed(2);
+            }
+
             // 1. Markdown
             document.getElementById('markdown-view').textContent = data.markdown_content || "No markdown returned.";
 

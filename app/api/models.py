@@ -35,12 +35,31 @@ class DocumentMetadata(BaseModel):
     id: str
     workflow_type: WorkflowType
 
+class TokenUsage(BaseModel):
+    input_tokens: int
+    output_tokens: int
+    total_tokens: int
+    estimated_cost: float
+
+class ServerlessMetrics(BaseModel):
+    cpu_time_seconds: float
+    wall_time_seconds: float
+
+class AdvancedMetrics(BaseModel):
+    peak_memory_mb: float
+    peak_cpu_usage_percent: float
+    avg_cpu_usage_percent: float
+    active_core_count: int
+
 class VerificationResult(BaseModel):
     status: str  # "CLEARED", "WARNING", "FAILED"
     checks: List[Dict[str, Any]]
     extracted_data: Dict[str, Any]
     message: Optional[str] = None
     markdown_content: str
+    usage: Optional[TokenUsage] = None
+    metrics: Optional[ServerlessMetrics] = None
+    advanced_metrics: Optional[AdvancedMetrics] = None
 
 class VerifyRequest(BaseModel):
     document_content: str # Base64 encoded or path? The user said "Request will send document its name, id and workflow type". 

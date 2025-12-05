@@ -6,3 +6,4 @@ docling
 docetl
 anthropic
 python-multipart
+psutil

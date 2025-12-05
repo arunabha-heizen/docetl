@@ -32,24 +32,57 @@ class Analyzer:
         """
         Classifies the document and extracts relevant information based on the workflow.
         """
+        total_input = 0
+        total_output = 0
+
         # 1. Classify
-        doc_type = self._classify_document(content)
+        doc_type, usage1 = self._classify_document(content)
+        total_input += usage1.input_tokens
+        total_output += usage1.output_tokens
         
         # 2. Extract
         # We look at the workflow rules to see what we need to verify.
         # For now, we extract a general summary and specific fields if defined.
-        extraction = self._extract_data(content, doc_type, workflow_type)
+        extraction, usage2 = self._extract_data(content, doc_type, workflow_type)
+        total_input += usage2.input_tokens
+        total_output += usage2.output_tokens
         
         # Log docetl output to file
         with open("docetl_extraction.json", "w") as f:
             json.dump(extraction, f, indent=2)
+
+        # Calculate Cost
+        cost = self._calculate_cost(total_input, total_output)
         
         return {
             "doc_type": doc_type,
-            "extraction": extraction
+            "extraction": extraction,
+            "usage": {
+                "input_tokens": total_input,
+                "output_tokens": total_output,
+                "total_tokens": total_input + total_output,
+                "estimated_cost": cost
+            }
         }
 
-    def _classify_document(self, content: str) -> str:
+    def _calculate_cost(self, input_tokens: int, output_tokens: int) -> float:
+        # Simple pricing logic per 1M tokens
+        # Default to Sonnet pricing if unknown
+        input_price = 3.00
+        output_price = 15.00
+        
+        model = self.model.lower()
+        if "haiku" in model:
+            input_price = 1.00
+            output_price = 5.00
+        elif "opus" in model:
+            input_price = 15.00
+            output_price = 75.00
+        
+        cost = (input_tokens / 1_000_000 * input_price) + (output_tokens / 1_000_000 * output_price)
+        return round(cost, 6)
+
+    def _classify_document(self, content: str):
         prompt = f"""
         You are a document classifier. 
         Classify the following document into one of these types: {', '.join(self.known_docs)}.
@@ -66,9 +99,9 @@ class Analyzer:
             max_tokens=100,
             messages=[{"role": "user", "content": prompt}]
         )
-        return response.content[0].text.strip()
+        return response.content[0].text.strip(), response.usage
 
-    def _extract_data(self, content: str, doc_type: str, workflow_type: str) -> Dict[str, Any]:
+    def _extract_data(self, content: str, doc_type: str, workflow_type: str):
         # In a real DocETL setup, we would define a pipeline with map operations.
         # Here we ask the LLM to extract key entities.
         
@@ -103,7 +136,9 @@ class Analyzer:
                 text = text.split("```json")[1].split("```")[0]
             elif "```" in text:
                 text = text.split("```")[1].split("```")[0]
-            return json.loads(text)
+            extraction = json.loads(text)
         except:
-            return {"raw_extraction": response.content[0].text}
+            extraction = {"raw_extraction": response.content[0].text}
+            
+        return extraction, response.usage
 

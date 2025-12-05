@@ -1,48 +1,41 @@
 {
-  "status": "WARNING",
+  "status": "CLEARED",
   "checks": [
     {
-      "rule": "Document type appropriateness for SAFE_REPURCHASE workflow",
+      "rule": "Document type appropriateness for SAFE repurchase workflow",
       "status": "PASS",
-      "reason": "Document type 'repurchase-safe-board-consent' is appropriate for SAFE_REPURCHASE workflow"
+      "reason": "The document type 'repurchase-safe-board-consent' is appropriate for the SAFE_REPURCHASE workflow as it represents the required board consent for SAFE repurchase."
     },
     {
-      "rule": "Board consent execution requirement for SAFE repurchase",
+      "rule": "Executed board consent approving the repurchase and repurchase amount",
       "status": "PASS",
-      "reason": "Board consent is executed with signature from Director 'Himanshu2' dated Dec 01, 2025"
+      "reason": "Board consent is executed with director signature from Himanshu2 (Director) dated Dec 01, 2025. The consent explicitly approves repurchase of SAFE issued to himanshu for $25,000.00 repurchase price."
     },
     {
-      "rule": "Board approval of repurchase and repurchase amount",
+      "rule": "Required SAFE repurchase clauses present",
       "status": "PASS",
-      "reason": "Board consent includes approval clause for repurchase of SAFE to 'himanshu' for $25,000.00"
+      "reason": "All essential clauses are present: repurchase approval ($25,000.00), authorization to execute repurchase agreement, general authorization for officers, ratification clause, and board determination of best interests."
     },
     {
-      "rule": "Required repurchase clauses presence",
+      "rule": "Proper identification of parties and amounts",
       "status": "PASS",
-      "reason": "All key clauses present: repurchase approval, authorization to execute, general authorization, ratification, and board determination"
+      "reason": "Company (heizen, DE corporation), investor (himanshu), SAFE principal amount ($50,000.00), and repurchase price ($25,000.00) are all clearly identified."
     },
     {
-      "rule": "SAFE Repurchase and Cancellation Agreement execution",
-      "status": "FAIL",
-      "reason": "Document only shows board consent. Per knowledge base, repurchase is only effective when both parties sign the SAFE Repurchase and Cancellation Agreement, which is not present"
+      "rule": "Date consistency and validity",
+      "status": "PASS",
+      "reason": "Effective date (December 1, 2025), SAFE issuance date (November 24, 2025), and signature date (Dec 01, 2025) are consistent and logical in sequence."
     },
     {
-      "rule": "Date consistency verification",
+      "rule": "Authorization for execution of repurchase agreement",
       "status": "PASS",
-      "reason": "Effective date (December 1, 2025) is after SAFE issuance date (November 24, 2025) and matches document creation date"
-    },
-    {
-      "rule": "Amount specification clarity",
-      "status": "PASS",
-      "reason": "Both original SAFE principal ($50,000.00) and repurchase price ($25,000.00) are clearly specified"
+      "reason": "The consent includes proper authorization for officers to execute and deliver a SAFE Repurchase and Cancellation Agreement with the investor."
     }
   ],
   "extracted_data": {
-    "document_type": "repurchase-safe-board-consent",
-    "workflow": "SAFE_REPURCHASE",
     "signatures": [
       {
-        "signatory": "Himanshu2",
+        "name": "Himanshu2",
         "email": "himanshu@heizen.tech",
         "title": "Director",
         "date": "Dec 01, 2025 13:06:38 UTC"
@@ -54,31 +47,47 @@
       "document_creation_date": "Dec 01, 2025 13:05:57 UTC"
     },
     "amounts": {
-      "original_safe_principal": "$50,000.00",
+      "safe_principal_amount": "$50,000.00",
       "repurchase_price": "$25,000.00"
     },
     "parties_involved": {
       "company": {
         "name": "heizen",
-        "jurisdiction": "Delaware corporation"
+        "type": "DE corporation"
       },
       "investor": {
         "name": "himanshu",
         "email": "himanshu@heizen.tech"
       },
-      "board_members": [
-        "Himanshu2"
-      ]
+      "document_creator": {
+        "name": "Omed Sharifi",
+        "email": "it@foundersform.com"
+      }
     },
     "safe_repurchase_clauses": {
       "repurchase_approval": "The repurchase and cancellation of the SAFE issued to himanshu for a repurchase price of $25,000.00 is hereby approved",
-      "authorization_to_execute": "Officers are authorized to execute and deliver a SAFE Repurchase and Cancellation Agreement with the Investor",
-      "general_authorization": "Officers are authorized to take all actions necessary to effectuate the repurchase and cancellation of the SAFE",
-      "ratification": "Any prior actions taken by officers in furtherance of the repurchase are ratified and approved",
+      "authorization_to_execute": "Officers are authorized and directed to execute and deliver a SAFE Repurchase and Cancellation Agreement with the Investor",
+      "general_authorization": "Officers are authorized to take all such actions and execute all such documents as may be necessary or advisable to effectuate the repurchase and cancellation of the SAFE",
+      "ratification": "Any actions taken by the officers prior to the date hereof in furtherance of the foregoing resolutions are hereby ratified, confirmed, and approved",
       "board_determination": "The Board has determined that such repurchase is in the best interests of the Company and its stockholders"
     },
-    "document_id": "b9eeb627-1071-4ac2-9512-e7be4ab3e41b",
-    "consent_type": "Unanimous Written Consent of the Board of Directors"
+    "document_metadata": {
+      "document_id": "b9eeb627-1071-4ac2-9512-e7be4ab3e41b",
+      "filename": "Board Consent - SAFE Repurchase - himanshu.docx",
+      "pages": 2,
+      "consent_type": "Unanimous Written Consent of the Board of Directors"
+    }
   },
-  "message": "Board consent document is properly executed and contains all required approvals for SAFE repurchase. However, this represents only the first step in the repurchase process. The repurchase will not be effective until both the company and investor execute the SAFE Repurchase and Cancellation Agreement. The board has authorized officers to execute this agreement, but the actual bilateral execution is still pending."
+  "message": "The repurchase-safe-board-consent document is compliant and cleared for the SAFE repurchase workflow. The board consent is properly executed with required signatures, contains all necessary clauses approving the SAFE repurchase for $25,000.00, and authorizes officers to execute the repurchase agreement. The next step would be execution of the actual SAFE Repurchase and Cancellation Agreement by both parties to make the repurchase effective.",
+  "markdown_content": "&lt;unknown&gt;\n\n## UNANIMOUS WRITTEN CONSENT OF THE BOARD OF DIRECTORS OF heizen\n\nThe undersigned, constituting all of the members of the Board of Directors (the \"Board\") of heizen, a DE corporation (the \"Company\"), acting pursuant to  the  applicable  provisions of the Delaware General Corporation Law and the Company's Bylaws, hereby adopt the following resolutions by unanimous written consent, effective as of December 1, 2025:\n\n## RECITALS\n\nWHEREAS , the Company previously issued a Simple Agreement for Future Equity (the \"SAFE\") to himanshu (the \"Investor\") on November 24, 2025 with a principal amount of $50,000.00;\n\nWHEREAS , the Company desires to repurchase and cancel the SAFE from the Investor for a repurchase price of $25,000.00; and\n\nWHEREAS ,  the  Board has determined that such repurchase is in the best interests of the Company and its stockholders.\n\n## RESOLUTIONS\n\nNOW, THEREFORE, BE IT  RESOLVED , that the repurchase and cancellation  of  the  SAFE  issued  to  himanshu  for  a  repurchase  price  of $25,000.00 is hereby approved;\n\nRESOLVED  FURTHER ,  that  the  officers  of  the  Company  are  hereby authorized  and  directed  to  execute  and  deliver  a  SAFE  Repurchase  and Cancellation  Agreement  (the  \"Repurchase  Agreement\")  with  the  Investor, substantially in the form presented to the Board;\n\nRESOLVED  FURTHER ,  that  the  officers  of  the  Company  are  hereby authorized  and  directed  to  take  all  such  actions  and  execute  all  such documents as may be necessary or advisable to effectuate the repurchase and cancellation of the SAFE, including but not limited to the payment of the repurchase price and the cancellation of the SAFE; and\n\nRESOLVED  FURTHER ,  that  any  actions  taken  by  the  officers  of  the Company prior to the date hereof in furtherance of the foregoing resolutions are hereby ratified, confirmed, and approved in all respects.\n\nIN  WITNESS WHEREOF, the undersigned have executed this Unanimous Written Consent as of the date first written above.\n\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\nDirector\n\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\nDirector\n\n<!-- image -->\n\n## Title: Board Consent - SAFE Repurchase - himanshu.docx\n\nDocument ID: b9eeb627-1071-4ac2-9512-e7be4ab3e41b\n\nHimanshu2\n\nhimanshu@heizen.tech\n\n{{s:1:y::::150:42}}\n\n## Files\n\nBoard Consent - SAFE Repurchase - himanshu.docx - 2 pages\n\nDec 01, 2025 13:05:57 UTC\n\nBoard Consent - SAFE Repurchase - himanshu.docx\\_si.pdf - 1 page\n\nDec 01, 2025 13:05:58 UTC\n\n## Activity\n\n<!-- image -->\n\n<!-- image -->\n\n<!-- image -->\n\n| Omed Sharifi   | created the document via API (it@foundersform.com)   | Dec 01, 2025 13:05:57 UTC   |\n|----------------|------------------------------------------------------|-----------------------------|\n| Himanshu2      | first viewed document (himanshu@heizen.tech)         | Dec 01, 2025 13:06:17 UTC   |\n| Himanshu2      | signed the document (himanshu@heizen.tech)           | Dec 01, 2025 13:06:38 UTC   |\n\n<!-- image -->\n\n## Title: Board Consent - SAFE Repurchase - himanshu.docx\n\nDocument ID: b9eeb627-1071-4ac2-9512-e7be4ab3e41b\n\nTime Zone: (GMT+00:00) Coordinated Universal Time",
+  "usage": {
+    "input_tokens": 2446,
+    "output_tokens": 622,
+    "total_tokens": 3068,
+    "estimated_cost": 0.016668
+  },
+  "metrics": {
+    "cpu_time_seconds": 56.3872,
+    "wall_time_seconds": 42.2192
+  }
 }
