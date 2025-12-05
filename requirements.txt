@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pydantic
+python-dotenv
+docling
+docetl
+anthropic
+python-multipart

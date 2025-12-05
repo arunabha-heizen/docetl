@@ -1,0 +1,131 @@
+{
+  "document_types": [
+    "409a",
+    "authorized-shares-board-consent",
+    "authorized-shares-certificate-of-amendment",
+    "authorized-shares-stockholder-consent",
+    "board-consent",
+    "certificate",
+    "stockholder-consent",
+    "action-by-sole-incorporator",
+    "board-consent-stock-option-plan",
+    "bylaws",
+    "certificate-of-incorporation",
+    "ciiaa-founder",
+    "initial-board-consent",
+    "restricted-stock-purchase-agreement",
+    "restricted-stock-purchase-agreement-double-trigger",
+    "restricted-stock-purchase-agreement-no-vesting",
+    "signing",
+    "stockholder-consent-stock-option-plan",
+    "common-stock-agreement",
+    "stock-option-agreement",
+    "authorized-convertible-note-board-consent",
+    "increase-authorized-convertible-note-board-consent",
+    "issued-convertible-note-document",
+    "authorized-safe-board-consent",
+    "increase-authorized-safe-board-consent",
+    "issued-safe-document",
+    "mfn-amended-safe-document",
+    "repurchase-safe-agreement",
+    "repurchase-safe-board-consent"
+  ],
+  "workflows": {
+    "INCREASE_AUTHORIZED_SHARES": {
+      "required_documents": [
+        "authorized-shares-board-consent",
+        "authorized-shares-stockholder-consent",
+        "authorized-shares-certificate-of-amendment"
+      ],
+      "verification_rules": [
+        "The sum of all issued and outstanding shares and shares reserved for issuance under a stock option plan must equal or be less than the authorized share capital at any time.",
+        "To increase the authorized amount of shares, there needs to be: An executed board consent; Executed stockholder consent; Executed Certificate of Amendment; Receipt of evidence of the certificate of amendment back from the registered agent.",
+        "For any item requiring stockholder consent, we require signatures to from a majority of the voting power."
+      ]
+    },
+    "INCREASE_STOCK_OPTION_PLAN": {
+      "required_documents": [
+        "board-consent",
+        "stockholder-consent"
+      ],
+      "verification_rules": [
+        "To increase a stock option plan, there needs to be a valid amount of authorized shares left.",
+        "Requires an executed board consent.",
+        "Requires an executed stockholder consent."
+      ]
+    },
+    "CREATE_STOCK_OPTION_PLAN": {
+      "required_documents": [
+        "board-consent-stock-option-plan",
+        "stockholder-consent-stock-option-plan"
+      ],
+      "verification_rules": [
+        "To enact a valid stock option plan, the amount of shares to be reserved under the plan together with the sum of issued and outstanding stock outside of the plan must equal or be lower than the authorized share capital effective at the time of enactment.",
+        "A stock option plan is effective upon an executed board consent and executed stockholder consent."
+      ]
+    },
+    "AUTHORIZED_ROUND": {
+      "required_documents": [
+        "authorized-safe-board-consent" 
+      ],
+      "verification_rules": [
+        "Before a SAFE/Note may be issued, the round needs to be authorized via an executed board consent.",
+        "Separate authorizations are required for a SAFE round vs. a convertible note round."
+      ]
+    },
+    "SAFE_ROUND": {
+       "required_documents": [
+         "authorized-safe-board-consent"
+       ],
+       "verification_rules": [
+         "Before a SAFE/Note may be issued, the round needs to be authorized via an executed board consent."
+       ]
+    },
+    "ISSUE_INDIVIDUAL_SAFE": {
+      "required_documents": [
+        "issued-safe-document"
+      ],
+      "verification_rules": [
+        "The SAFEs/notes must contain the same terms as each other (valuation cap, discount and/or MFN election and interest rate only for notes).",
+        "The maximum number of SAFEs/notes that may be issued from a round is that amount which the sum of the investment amount would equal the authorized amount.",
+        "If this sum may or will be exceeded, then the additional SAFE/note which would result in the excess may not be issued unless and until the company authorizes an increase to the SAFE/note round."
+      ]
+    },
+    "VALUATION_409A": {
+      "required_documents": ["409a"],
+      "verification_rules": [
+        "409a valuations are ineffective upon the earlier of a material event or 12 months from the valuation date.",
+        "Valuation date means the date of measurement, not the date the report was generated."
+      ]
+    },
+    "COMPANY_SERVICE_PROVIDER": {
+      "required_documents": ["ciiaa-founder", "signing"],
+      "verification_rules": [
+        "Before any equity may be issued, the individual must be added as a service provider and have completed their requisite documentation (Advisor Agreement, CIIAA and Offer Letter, or Independent Contractor Agreement)."
+      ]
+    },
+    "TERMINATE_COMPANY_SERVICE_PROVIDER": {
+       "required_documents": [],
+       "verification_rules": [
+         "For a termination to be effective, the service provider needs to be recorded or added on the platform then the user/company must sign the separation notice.",
+         "Upon termination of a service provider, there will be no further vesting; any unvested shares will remain unvested."
+       ]
+    }
+  },
+  "knowledge_base": {
+    "Authorized Shares": "The sum of all issued and outstanding shares (restricted stock outside of stock option plan) and shares reserved for issuance under a stock option plan must equal or be less than the authorized share capital at any time. If promised grants would exceed this number, then valid. However, to the extent there is an excess, the shares can’t be issued.",
+    "Increase Authorized Shares": "To increase the authorized amount of shares, there needs to be: An executed board consent; Executed stockholder consent; Executed Certificate of Amendment; Receipt of evidence of the certificate of amendment back from the registered agent.",
+    "Stockholder Consents": "For any item requiring stockholder consent, we require signatures to from a majority of the voting power. Voting power = number of shares from restricted stock (think from incorporation flow or registering existing business) + restricted stock from outside plan + restricted stock from stock option plan + shares from exercised stock option grant",
+    "Share Issuance": "Shares are deemed issued and outstanding (options, restricted stock from plan, restricted stock outside plan) when there is a signed board consent. The board consent must list: The name of the grantee; Amount of shares; Vesting schedule (if any); Vesting start date (if subject to vesting); Exercise price per share (if an option grant) and purchase price per share (if restricted stock); and Type of grant (ISO/NSO, restricted stock from plan, or restricted stock outside of plan). The board must approve the fair market value of the price per share of Common Stock in each board consent per which they are issuing equity.",
+    "Termination": "For a termination to be effective, the service provider needs to be recorded or added on the platform then the user/company must sign the separation notice",
+    "Pre-Requisite to Share Issuance": "Before any equity may be issued, the individual must be added as a service provider and have completed their requisite documentation: Advisor – Advisor Agreement; Employee – CIIAA and Offer Letter; Independent Contractor – Independent Contractor Agreement",
+    "Stock Option Plan": "To enact a valid stock option plan, the amount of shares to be reserved under the plan (or any increase to the stock option plan) together with the sum of issued and outstanding stock outside of the plan (restricted stock) must equal or be lower than the authorized share capital effective at the time of enactment. A stock option plan is effective upon: An executed board consent; and Executed stockholder consent. To increase a stock option plan, there needs to be a valid amount of authorized shares left and: An executed board consent; and Executed stockholder consent",
+    "Option Grants": "An option grant (ISO or NSO) may only be issued under a stock option plan. The exercise price per share must always equal the fair market value of the per share price of Common Stock as of the date of grant. If an ISO, and the ISO is to be issued to a stockholder who owns more than 10% of the company’s voting power (meaning the basis is all restricted stock either from or outside a stock option plan and exercised stock options), then the exercise price must be set at 110% of the fair market value",
+    "Fair Market Value": "Fair market value is initially equal to the par value per share of Common Stock (see incorporation flow). Fair market value changes once the company realizes a material amount of revenue, authorized a SAFE round or convertible note round, authorizes a Series Seed financing or Series A financing, or have entered into LOIs with customers or with investors for the same. After such material events, companies are advised to obtain a 409a valuation from an independent appraiser. However, a company may set the fair market value of the per share price of Common Stock with approval of the board (ie a board consent). 409a valuations are ineffective upon the earlier of a material event or 12 months from the valuation date. Valuation date means the date of measurement, not the date the report was generated.",
+    "Exercise of Option Grant": "A grantee may only exercise (ie purchase and receive) the amount of shares subject to an option grant that is vested as of the time of exercise. Shares vest in accordance to the vesting schedule set out in the board consent approving the grant. The applicable start date for vesting (as well as the vesting schedule) is individual to each grant and grantee. A grantee may have multiple stock option grants or restricted stock grants (outside or from a stock option plan). Upon termination of a service provider, there will be no further vesting; any unvested shares will remain unvested. Unvested shares under a stock option grant will return back to the stock option plan, meaning that that the shares remaining available for issuance will increase to the corresponding value. A service provider who has been terminated will have [3 months] after their termination date to exercise their vested shares under the stock option grant. If they do not exercise some or all of the vested shares after that date, then those shares also revert back to the stock option plan and become available for issuance under the stock option plan. Once exercised, they are deemed a stockholder of the company and their shares may vote (ie they are added to the list of folks who are sent a stockholder consent). The denominator of voting power is expanded by the amount of shares that are exercised.",
+    "Restricted Stock": "The purchase price per share for restricted stock may be set below the fair market value per share of Common Stock at the time. Any difference between the fair market value per share of Common Stock and purchase price per share for a restricted stock grant will be recognized on the grantee’s tax bill for the corresponding calendar at ordinary income tax rates. We have assumed on the platform that the purchase price share for restricted stock (both from a plan and outside a plan) will equal the fair market value per share of Common Stock at the time. Unlike option holders, a service provider with restricted stock is considered a stockholder of the company and will receive any stockholder consent. If terminated, then as of the date of termination, the shares will no longer vest. Any vested shares will remain with the stockholder. The unvested shares will and must be repurchased by the company (which simply requires delivery of notice per the system and payment of the product of the unvested shares and the purchase price per share). Any unvested shares repurchased will revert back to the plan. The denominator of any voting power of the company will be correspondingly reduced by the amount of unvested shares. If no shares are vested, then the holder is no longer considered a stockholder of the company who will receive stockholder consent unless they have a separate restricted stock grant or received shares via the exercise of an option grant.",
+    "SAFEs and Notes": "Before a SAFE/Note may be issued, there needs the round needs to be authorized. Separate authorizations are required for a SAFE round vs. a convertible note round. Authorization comes via an executed board consent. Once a round is authorized, individual SAFEs/notes may be issued. The SAFEs/notes must contain the same terms as each other (valuation cap, discount and/or MFN election and interest rate only for notes). Otherwise, a separate round must be authorized. The maximum number of SAFEs/notes that may be issued from a round is that amount which the sum of the investment amount would equal the authorized amount. For notes, this means the principal amount (not that amount together with accrued interest). If this sum may or will be exceeded, then the additional SAFE/note which would result in the excess may not be issued unless and until the company authorizes an increase to the SAFE/note round. An increase to the SAFE/note round is effective upon an executed board consent.",
+    "SAFE Repurchase and Cancellation": "To repurchase a SAFE, there needs to be an executed board consent approving the repurchase and the repurchase amount. Repurchase is effective when both parties sign the SAFE Repurchase and Cancellation Agreement",
+    "MFN": "A SAFE or convertible note can have an MFN or Most Favored Nations feature. The MFN basically provides that if a SAFE or convertible note is issued after the date of the current convertible note or SAFE that has the MFN and has better economic features, then the current convertible note or SAFE with the MFN feature will adopt those same terms as if it was provided to them originally. What are the better features? Basically it is a valuation cap lower than the valuation cap provided in the current convertible note or SAFE with the MFN feature or a higher discount/lower discount rate than the discount/discount rate provided in the current convertible note or SAFE with the MFN feature. SAFEs aren’t debt, so any increase to interest rate is not adopted. However, higher interest rates for subsequent convertible notes counts as a better feature. The user should be notified when an MFN is triggered under Upcoming Tasks. The changes to the SAFE/note are effective upon signature of the Amended and Restated SAFE/Note document and to be reflected on the system. The MFN will no longer apply after such date."
+  }
+}
