@@ -1,0 +1,84 @@
+{
+  "status": "WARNING",
+  "checks": [
+    {
+      "rule": "Document type appropriateness for SAFE_REPURCHASE workflow",
+      "status": "PASS",
+      "reason": "Document type 'repurchase-safe-board-consent' is appropriate for SAFE_REPURCHASE workflow"
+    },
+    {
+      "rule": "Board consent execution requirement for SAFE repurchase",
+      "status": "PASS",
+      "reason": "Board consent is executed with signature from Director 'Himanshu2' dated Dec 01, 2025"
+    },
+    {
+      "rule": "Board approval of repurchase and repurchase amount",
+      "status": "PASS",
+      "reason": "Board consent includes approval clause for repurchase of SAFE to 'himanshu' for $25,000.00"
+    },
+    {
+      "rule": "Required repurchase clauses presence",
+      "status": "PASS",
+      "reason": "All key clauses present: repurchase approval, authorization to execute, general authorization, ratification, and board determination"
+    },
+    {
+      "rule": "SAFE Repurchase and Cancellation Agreement execution",
+      "status": "FAIL",
+      "reason": "Document only shows board consent. Per knowledge base, repurchase is only effective when both parties sign the SAFE Repurchase and Cancellation Agreement, which is not present"
+    },
+    {
+      "rule": "Date consistency verification",
+      "status": "PASS",
+      "reason": "Effective date (December 1, 2025) is after SAFE issuance date (November 24, 2025) and matches document creation date"
+    },
+    {
+      "rule": "Amount specification clarity",
+      "status": "PASS",
+      "reason": "Both original SAFE principal ($50,000.00) and repurchase price ($25,000.00) are clearly specified"
+    }
+  ],
+  "extracted_data": {
+    "document_type": "repurchase-safe-board-consent",
+    "workflow": "SAFE_REPURCHASE",
+    "signatures": [
+      {
+        "signatory": "Himanshu2",
+        "email": "himanshu@heizen.tech",
+        "title": "Director",
+        "date": "Dec 01, 2025 13:06:38 UTC"
+      }
+    ],
+    "dates": {
+      "effective_date": "December 1, 2025",
+      "safe_issuance_date": "November 24, 2025",
+      "document_creation_date": "Dec 01, 2025 13:05:57 UTC"
+    },
+    "amounts": {
+      "original_safe_principal": "$50,000.00",
+      "repurchase_price": "$25,000.00"
+    },
+    "parties_involved": {
+      "company": {
+        "name": "heizen",
+        "jurisdiction": "Delaware corporation"
+      },
+      "investor": {
+        "name": "himanshu",
+        "email": "himanshu@heizen.tech"
+      },
+      "board_members": [
+        "Himanshu2"
+      ]
+    },
+    "safe_repurchase_clauses": {
+      "repurchase_approval": "The repurchase and cancellation of the SAFE issued to himanshu for a repurchase price of $25,000.00 is hereby approved",
+      "authorization_to_execute": "Officers are authorized to execute and deliver a SAFE Repurchase and Cancellation Agreement with the Investor",
+      "general_authorization": "Officers are authorized to take all actions necessary to effectuate the repurchase and cancellation of the SAFE",
+      "ratification": "Any prior actions taken by officers in furtherance of the repurchase are ratified and approved",
+      "board_determination": "The Board has determined that such repurchase is in the best interests of the Company and its stockholders"
+    },
+    "document_id": "b9eeb627-1071-4ac2-9512-e7be4ab3e41b",
+    "consent_type": "Unanimous Written Consent of the Board of Directors"
+  },
+  "message": "Board consent document is properly executed and contains all required approvals for SAFE repurchase. However, this represents only the first step in the repurchase process. The repurchase will not be effective until both the company and investor execute the SAFE Repurchase and Cancellation Agreement. The board has authorized officers to execute this agreement, but the actual bilateral execution is still pending."
+}

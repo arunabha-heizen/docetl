@@ -40,6 +40,10 @@ class Analyzer:
         # For now, we extract a general summary and specific fields if defined.
         extraction = self._extract_data(content, doc_type, workflow_type)
         
+        # Log docetl output to file
+        with open("docetl_extraction.json", "w") as f:
+            json.dump(extraction, f, indent=2)
+        
         return {
             "doc_type": doc_type,
             "extraction": extraction

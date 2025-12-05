@@ -41,7 +41,8 @@ async def verify_document(
             status=verification_result.get("status", "WARNING"),
             checks=verification_result.get("checks", []),
             extracted_data=extraction,
-            message=verification_result.get("message")
+            message=verification_result.get("message"),
+            markdown_content=markdown_content
         )
 
     except Exception as e:

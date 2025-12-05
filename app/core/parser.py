@@ -12,4 +12,10 @@ class Parser:
         """
         result = self.converter.convert(file_path)
         # Docling returns a conversion result which can be exported to markdown
-        return result.document.export_to_markdown()
+        markdown_content = result.document.export_to_markdown()
+        
+        # Log docling output to file
+        with open("docling_output.md", "w") as f:
+            f.write(markdown_content)
+            
+        return markdown_content

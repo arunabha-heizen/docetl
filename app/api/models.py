@@ -18,6 +18,7 @@ class WorkflowType(str, Enum):
     RECORD_AUTHORIZED_ROUND = "RECORD_AUTHORIZED_ROUND"
     RECORD_AUTHORIZED_SAFE_ROUND = "RECORD_AUTHORIZED_SAFE_ROUND"
     REPURCHASE_INDIVIDUAL_SAFE = "REPURCHASE_INDIVIDUAL_SAFE"
+    SAFE_REPURCHASE = "SAFE_REPURCHASE"
     RECORD_ISSUE_INDIVIDUAL_NOTE = "RECORD_ISSUE_INDIVIDUAL_NOTE"
     RECORD_ISSUE_INDIVIDUAL_SAFE_NOTE = "RECORD_ISSUE_INDIVIDUAL_SAFE_NOTE"
     VALUATION_409A = "VALUATION_409A"
@@ -39,6 +40,7 @@ class VerificationResult(BaseModel):
     checks: List[Dict[str, Any]]
     extracted_data: Dict[str, Any]
     message: Optional[str] = None
+    markdown_content: str
 
 class VerifyRequest(BaseModel):
     document_content: str # Base64 encoded or path? The user said "Request will send document its name, id and workflow type". 

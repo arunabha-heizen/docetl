@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocETL Verification Service</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --panel-bg: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: #1e293b;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        select,
+        input,
+        button {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-weight: 500;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        button:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            padding: 1rem;
+            gap: 1rem;
+            overflow: hidden;
+        }
+
+        .panel {
+            flex: 1;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 0.75rem 1rem;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #475569;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            color: #64748b;
+            border: 1px solid #cbd5e1;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            border-radius: 4px;
+        }
+
+        .copy-btn:hover {
+            background-color: white;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .panel-content {
+            flex: 1;
+            overflow: auto;
+            padding: 1rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+        }
+
+        #markdown-view {
+            white-space: pre-wrap;
+            font-family: sans-serif;
+            line-height: 1.5;
+        }
+
+        .check-item {
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid transparent;
+        }
+
+        .check-pass {
+            background-color: #f0fdf4;
+            border-color: #bbf7d0;
+            color: #166534;
+        }
+
+        .check-fail {
+            background-color: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
+
+        .check-warning {
+            background-color: #fffbeb;
+            border-color: #fde68a;
+            color: #92400e;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .status-CLEARED {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-WARNING {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .status-FAILED {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .loading {
+            display: none;
+            color: #64748b;
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>DocETL Verification</h1>
+    </header>
+
+    <div class="controls">
+        <input type="file" id="fileInput" accept=".pdf">
+        <input type="text" id="docName" placeholder="Document Name" value="Board Consent">
+        <input type="text" id="docId" placeholder="ID" value="123">
+        <select id="workflowType">
+            <option value="SAFE_REPURCHASE">SAFE Repurchase</option>
+            <option value="INCREASE_AUTHORIZED_SHARES">Increase Authorized Shares</option>
+            <option value="INCREASE_STOCK_OPTION_PLAN">Increase Stock Option Plan</option>
+            <option value="CREATE_STOCK_OPTION_PLAN">Create Stock Option Plan</option>
+            <option value="AUTHORIZED_ROUND">Authorized Round</option>
+            <option value="SAFE_ROUND">SAFE Round</option>
+            <option value="ISSUE_INDIVIDUAL_SAFE">Issue Individual SAFE</option>
+        </select>
+        <button onclick="runVerification()" id="verifyBtn">Verify Document</button>
+        <span class="loading" id="loading">Processing... (this may take a minute)</span>
+    </div>
+
+    <div class="main-container">
+        <!-- Panel 1: Docling Output -->
+        <div class="panel">
+            <div class="panel-header">
+                Docling Output (Markdown)
+                <button class="copy-btn" onclick="copyToClipboard('markdown-view')">Copy</button>
+            </div>
+            <div class="panel-content" id="markdown-view">Upload a file to see parsed content...</div>
+        </div>
+
+        <!-- Panel 2: DocETL Extraction -->
+        <div class="panel">
+            <div class="panel-header">
+                DocETL Extraction (JSON)
+                <button class="copy-btn" onclick="copyToClipboard('json-view')">Copy</button>
+            </div>
+            <div class="panel-content" id="json-view"></div>
+        </div>
+
+        <!-- Panel 3: Verification Rules -->
+        <div class="panel">
+            <div class="panel-header">
+                <span>Verification Results <span id="status-badge"></span></span>
+                <button class="copy-btn" onclick="copyToClipboard('results-view')">Copy</button>
+            </div>
+            <div class="panel-content" id="results-view"></div>
+        </div>
+    </div>
+
+    <script>
+        async function runVerification() {
+            const fileInput = document.getElementById('fileInput');
+            const verifyBtn = document.getElementById('verifyBtn');
+            const loading = document.getElementById('loading');
+
+            if (!fileInput.files[0]) {
+                alert('Please select a file');
+                return;
+            }
+
+            // Reset UI
+            verifyBtn.disabled = true;
+            loading.style.display = 'inline';
+            document.getElementById('markdown-view').textContent = 'Processing...';
+            document.getElementById('json-view').textContent = 'Processing...';
+            document.getElementById('results-view').innerHTML = '';
+            document.getElementById('status-badge').className = '';
+            document.getElementById('status-badge').textContent = '';
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('name', document.getElementById('docName').value);
+            formData.append('id', document.getElementById('docId').value);
+            formData.append('workflow_type', document.getElementById('workflowType').value);
+
+            try {
+                const response = await fetch('/api/v1/verify', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                // Update UI
+                renderResults(data);
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('markdown-view').textContent = 'Error: ' + error.message;
+            } finally {
+                verifyBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        }
+
+        function renderResults(data) {
+            // 1. Markdown
+            document.getElementById('markdown-view').textContent = data.markdown_content || "No markdown returned.";
+
+            // 2. Extraction
+            document.getElementById('json-view').textContent = JSON.stringify(data.extracted_data, null, 2);
+
+            // 3. Status
+            const badge = document.getElementById('status-badge');
+            badge.textContent = data.status;
+            badge.className = `status-badge status-${data.status}`;
+
+            // 4. Checks
+            const resultsView = document.getElementById('results-view');
+            resultsView.innerHTML = '';
+
+            if (data.message) {
+                const msgDiv = document.createElement('div');
+                msgDiv.style.marginBottom = '1rem';
+                msgDiv.style.fontStyle = 'italic';
+                msgDiv.textContent = data.message;
+                resultsView.appendChild(msgDiv);
+            }
+
+            if (data.checks && data.checks.length > 0) {
+                data.checks.forEach(check => {
+                    const div = document.createElement('div');
+                    const statusClass = check.status === 'PASS' ? 'check-pass' : (check.status === 'FAIL' ? 'check-fail' : 'check-warning');
+                    div.className = `check-item ${statusClass}`;
+
+                    div.innerHTML = `
+                        <div style="font-weight:600; margin-bottom:0.25rem;">${check.rule}</div>
+                        <div>Status: <strong>${check.status}</strong></div>
+                        <div style="margin-top:0.25rem; font-size:0.8rem opacity:0.9;">${check.reason || ''}</div>
+                    `;
+                    resultsView.appendChild(div);
+                });
+            } else {
+                resultsView.textContent = "No specific checks returned.";
+            }
+        }
+
+        async function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+
+            const text = element.innerText; // Use innerText to preserve line breaks but skip HTML tags for better copy
+
+            try {
+                await navigator.clipboard.writeText(text);
+
+                // Visual feedback
+                const btn = element.parentElement.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy to clipboard');
+            }
+        }
+    </script>
+</body>
+
+</html>

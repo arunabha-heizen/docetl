@@ -1,0 +1,72 @@
+--progress is a global compose flag, better use `docker compose --progress xx build ...
+time="2025-12-05T16:57:09+05:30" level=warning msg="The \"ANTHROPIC_API_KEY\" variable is not set. Defaulting to a blank string."
+time="2025-12-05T16:57:09+05:30" level=warning msg="C:\\Users\\Arunabha\\Desktop\\work\\docetl\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+Compose now can delegate build to bake for better performances
+Just set COMPOSE_BAKE=true
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [api internal] load build definition from Dockerfile
+#1 transferring dockerfile: 544B 0.0s done
+#1 DONE 0.0s
+
+#2 [api internal] load metadata for docker.io/library/python:3.11-slim
+#2 DONE 1.2s
+
+#3 [api internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [api 1/6] FROM docker.io/library/python:3.11-slim@sha256:193fdd0bbcb3d2ae612bd6cc3548d2f7c78d65b549fcaa8af75624c47474444d
+#4 DONE 0.0s
+
+#5 [api 2/6] WORKDIR /app
+#5 CACHED
+
+#6 [api internal] load build context
+#6 transferring context: 100.40MB 5.0s
+#6 transferring context: 233.95MB 10.1s
+#6 ...
+
+#7 [api 3/6] RUN apt-get update && apt-get install -y     build-essential     libgl1-mesa-glx     libglib2.0-0     && rm -rf /var/lib/apt/lists/*
+#7 0.946 Hit:1 http://deb.debian.org/debian trixie InRelease
+#7 1.090 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#7 1.425 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#7 1.644 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9670 kB]
+#7 8.199 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+#7 8.366 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [81.6 kB]
+#7 9.934 Fetched 9848 kB in 9s (1049 kB/s)
+#7 9.934 Reading package lists...
+#7 ...
+
+#6 [api internal] load build context
+#6 transferring context: 351.75MB 15.1s
+#6 ...
+
+#7 [api 3/6] RUN apt-get update && apt-get install -y     build-essential     libgl1-mesa-glx     libglib2.0-0     && rm -rf /var/lib/apt/lists/*
+#7 9.934 Reading package lists...
+#7 12.11 Reading package lists...
+#7 14.09 Building dependency tree...
+#7 14.65 Reading state information...
+#7 14.70 Package libgl1-mesa-glx is not available, but is referred to by another package.
+#7 14.70 This may mean that the package is missing, has been obsoleted, or
+#7 14.70 is only available from another source
+#7 14.70 
+#7 14.71 E: Package 'libgl1-mesa-glx' has no installation candidate
+#7 ERROR: process "/bin/sh -c apt-get update && apt-get install -y     build-essential     libgl1-mesa-glx     libglib2.0-0     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+
+#6 [api internal] load build context
+#6 transferring context: 359.01MB 15.4s done
+#6 CANCELED
+------
+ > [api 3/6] RUN apt-get update && apt-get install -y     build-essential     libgl1-mesa-glx     libglib2.0-0     && rm -rf /var/lib/apt/lists/*:
+9.934 Reading package lists...
+12.11 Reading package lists...
+14.09 Building dependency tree...
+14.65 Reading state information...
+14.70 Package libgl1-mesa-glx is not available, but is referred to by another package.
+14.70 This may mean that the package is missing, has been obsoleted, or
+14.70 is only available from another source
+14.70 
+14.71 E: Package 'libgl1-mesa-glx' has no installation candidate
+------
+failed to solve: process "/bin/sh -c apt-get update && apt-get install -y     build-essential     libgl1-mesa-glx     libglib2.0-0     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100

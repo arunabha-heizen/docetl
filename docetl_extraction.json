@@ -1,0 +1,38 @@
+{
+  "signatures": [],
+  "dates": {
+    "document_date": "December 1, 2025",
+    "payment_date": "November 24, 2025"
+  },
+  "amounts": {
+    "purchase_amount": "$50,000.00",
+    "valuation_cap": "$7,500,000.00",
+    "discount_rate": "78%"
+  },
+  "parties_involved": {
+    "company": {
+      "name": "heizen",
+      "type": "DE corporation"
+    },
+    "investor": {
+      "name": "himanshu"
+    }
+  },
+  "clauses_related_to_safe": {
+    "equity_financing": "Automatic conversion into Safe Preferred Stock shares equal to Purchase Amount divided by Conversion Price upon Equity Financing",
+    "liquidity_event": "Entitled to receive greater of Cash-Out Amount or Conversion Amount in a Liquidity Event",
+    "dissolution_event": "Entitled to receive Cash-Out Amount in a Dissolution Event",
+    "liquidation_priority": "Junior to indebtedness and creditor claims, on par with Preferred Stock, senior to Common Stock, junior to other SAFEs with greater or equal Purchase Amount",
+    "conversion_mechanics": {
+      "conversion_price": "Either Safe Price or Discount Price, whichever results in greater number of shares",
+      "safe_price": "Valuation Cap divided by Company Capitalization",
+      "discount_price": "Standard Preferred Stock price multiplied by Discount Rate (78%)"
+    },
+    "company_representations": [
+      "Duly organized DE corporation in good standing",
+      "Has power and authority to execute SAFE",
+      "SAFE constitutes legal, valid and binding obligation",
+      "Performance does not violate material judgments, statutes, or regulations"
+    ]
+  }
+}

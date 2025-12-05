@@ -66,7 +66,7 @@
     },
     "AUTHORIZED_ROUND": {
       "required_documents": [
-        "authorized-safe-board-consent" 
+        "authorized-safe-board-consent"
       ],
       "verification_rules": [
         "Before a SAFE/Note may be issued, the round needs to be authorized via an executed board consent.",
@@ -74,12 +74,12 @@
       ]
     },
     "SAFE_ROUND": {
-       "required_documents": [
-         "authorized-safe-board-consent"
-       ],
-       "verification_rules": [
-         "Before a SAFE/Note may be issued, the round needs to be authorized via an executed board consent."
-       ]
+      "required_documents": [
+        "authorized-safe-board-consent"
+      ],
+      "verification_rules": [
+        "Before a SAFE/Note may be issued, the round needs to be authorized via an executed board consent."
+      ]
     },
     "ISSUE_INDIVIDUAL_SAFE": {
       "required_documents": [
@@ -91,25 +91,40 @@
         "If this sum may or will be exceeded, then the additional SAFE/note which would result in the excess may not be issued unless and until the company authorizes an increase to the SAFE/note round."
       ]
     },
+    "SAFE_REPURCHASE": {
+      "required_documents": [
+        "repurchase-safe-board-consent",
+        "repurchase-safe-agreement"
+      ],
+      "verification_rules": [
+        "To repurchase a SAFE, there needs to be an executed board consent approving the repurchase and the repurchase amount.",
+        "Repurchase is effective when both parties sign the SAFE Repurchase and Cancellation Agreement."
+      ]
+    },
     "VALUATION_409A": {
-      "required_documents": ["409a"],
+      "required_documents": [
+        "409a"
+      ],
       "verification_rules": [
         "409a valuations are ineffective upon the earlier of a material event or 12 months from the valuation date.",
         "Valuation date means the date of measurement, not the date the report was generated."
       ]
     },
     "COMPANY_SERVICE_PROVIDER": {
-      "required_documents": ["ciiaa-founder", "signing"],
+      "required_documents": [
+        "ciiaa-founder",
+        "signing"
+      ],
       "verification_rules": [
         "Before any equity may be issued, the individual must be added as a service provider and have completed their requisite documentation (Advisor Agreement, CIIAA and Offer Letter, or Independent Contractor Agreement)."
       ]
     },
     "TERMINATE_COMPANY_SERVICE_PROVIDER": {
-       "required_documents": [],
-       "verification_rules": [
-         "For a termination to be effective, the service provider needs to be recorded or added on the platform then the user/company must sign the separation notice.",
-         "Upon termination of a service provider, there will be no further vesting; any unvested shares will remain unvested."
-       ]
+      "required_documents": [],
+      "verification_rules": [
+        "For a termination to be effective, the service provider needs to be recorded or added on the platform then the user/company must sign the separation notice.",
+        "Upon termination of a service provider, there will be no further vesting; any unvested shares will remain unvested."
+      ]
     }
   },
   "knowledge_base": {
