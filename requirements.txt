@@ -1,9 +1,6 @@
-fastapi
-uvicorn
 pydantic
 python-dotenv
 docling
 docetl
 anthropic
-python-multipart
-psutil
+boto3

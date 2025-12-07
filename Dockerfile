@@ -1,22 +1,17 @@
-FROM python:3.11-slim
+FROM public.ecr.aws/lambda/python:3.11
 
-WORKDIR /app
+# Install system dependencies if required by docling/docetl
+# The AWS base image uses microdnf (Amazon Linux 2023) or yum (AL2)
+RUN dnf update -y && dnf install -y mesa-libGL glib2 && dnf clean all
 
-# Install system dependencies
-# docling/docetl might need build tools or specific libs
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libgl1 \
-    libglib2.0-0 \
-    && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt ${LAMBDA_TASK_ROOT}
 
-COPY requirements.txt .
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Copy application code
+COPY app ${LAMBDA_TASK_ROOT}/app
+COPY .env ${LAMBDA_TASK_ROOT}
 
-# Expose port
-EXPOSE 8000
-
-# Command to run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Set the CMD to your handler
+CMD [ "app.handler.lambda_handler" ]
